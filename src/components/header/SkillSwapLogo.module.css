@@ -1,0 +1,71 @@
+.container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 2rem 0;
+    position: relative;
+    z-index: 20;
+  }
+  
+  .logoText {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    display: flex;
+    gap: 2px;
+  }
+  
+  .letter {
+    display: inline-block;
+    color: #ffffff;
+    position: relative;
+    animation: float 3s ease-in-out infinite;
+    animation-delay: var(--delay);
+    text-shadow: 
+      0 2px 4px rgba(0, 0, 0, 0.2),
+      0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+  .letter:hover {
+    transform: translateY(-5px);
+    text-shadow: 
+      0 4px 8px rgba(0, 0, 0, 0.3),
+      0 6px 12px rgba(255, 255, 255, 0.2);
+  }
+  
+  .letter::before {
+    content: attr(data-letter);
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: transparent;
+    background: linear-gradient(180deg, #ffffff, #e0c4ff);
+    background-size: 100% 200%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: shine 4s linear infinite;
+    animation-delay: var(--shine-delay);
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  
+  @keyframes shine {
+    0% { 
+      background-position: 0% 0%;
+      opacity: 0.9;
+    }
+    50% { 
+      background-position: 0% 100%;
+      opacity: 1;
+    }
+    100% { 
+      background-position: 0% 0%;
+      opacity: 0.9;
+    }
+  }

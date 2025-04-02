@@ -1,103 +1,137 @@
-import Image from "next/image";
+'use client'
 
-export default function Home() {
+import React, { useEffect, useState } from 'react'
+import StarButton from "../components/StarButton"
+import SkillSwapLogo from "../components/header"
+import Head from 'next/head'
+import Link from 'next/link'
+import { motion } from 'framer-motion'
+
+const HomePage = () => {
+  const [isMounted, setIsMounted] = useState(false)
+  
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <>
+      <Head>
+        <title>Compartilhe Conhecimento | SkillSwap</title>
+        <meta name="description" content="Aprenda e ensine em uma comunidade colaborativa" />
+      </Head>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      {/* Container principal */}
+      <div className="min-h-screen flex flex-col items-center p-4 relative overflow-hidden">
+        {/* Efeitos de fundo */}
+        <div className="absolute inset-0 overflow-hidden z-0">
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-900 via-violet-800 to-fuchsia-700 opacity-90 animate-gradient-x" />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+
+        {/* Conteúdo (renderizado condicionalmente após montagem) */}
+        {isMounted && (
+          <>
+            {/* Logo */}
+            <div className="w-full flex justify-center pt-6 z-20">
+              <SkillSwapLogo size="lg" />
+            </div>
+
+            {/* Card principal */}
+            <motion.main
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="z-10 max-w-4xl w-full mx-auto text-center p-8 bg-white bg-opacity-90 rounded-xl shadow-2xl backdrop-blur-sm"
+            >
+              <h1 className="text-5xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-fuchsia-500">
+                Conhecimento Compartilhado
+              </h1>
+              
+              <div className="mb-10 space-y-6">
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.2 }}
+                  className="text-xl text-gray-700 hover:text-purple-800 transition-colors"
+                >
+                  Imagine um mundo onde cada pessoa pode ensinar algo único e aprender algo novo todos os dias.
+                </motion.p>
+                
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.3 }}
+                  className="text-lg text-gray-600 hover:text-violet-800 transition-colors"
+                >
+                  Aqui, você encontra a oportunidade de compartilhar seu conhecimento com quem não sabe, 
+                  enquanto aprende com quem domina habilidades que você ainda não possui.
+                </motion.p>
+              </div>
+
+              <div className="flex flex-col sm:flex-row justify-center gap-6">
+                <StarButton text="Quero Aprender" />
+              </div>
+
+              {/* Link "Saiba mais" com animação segura */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.6 }}
+                className="mt-12"
+              >
+                <Link 
+                  href="/about-us" 
+                  className="inline-flex items-center text-purple-600 hover:text-purple-800 transition-colors group font-medium"
+                >
+                  <span className="mr-2">Conheça mais sobre nosso propósito</span>
+                  <motion.svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="ml-1"
+                    animate={{ 
+                      x: [0, 4, 0],
+                      transition: {
+                        repeat: Infinity,
+                        duration: 1.5,
+                        ease: "easeInOut"
+                      } 
+                    }}
+                  >
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </motion.svg>
+                </Link>
+              </motion.div>
+            </motion.main>
+
+            <footer className="z-10 mt-12 text-white text-opacity-80">
+              <p className="text-sm sm:text-base">
+                Juntos, podemos construir uma rede de conhecimento sem limites.
+              </p>
+            </footer>
+          </>
+        )}
+      </div>
+
+      <style jsx global>{`
+        @keyframes gradient-x {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        .animate-gradient-x {
+          background-size: 200% 200%;
+          animation: gradient-x 12s ease infinite;
+        }
+      `}</style>
+    </>
+  )
 }
+
+export default HomePage
